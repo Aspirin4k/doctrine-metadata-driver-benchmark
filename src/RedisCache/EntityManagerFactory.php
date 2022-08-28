@@ -2,7 +2,7 @@
 
 namespace App\RedisCache;
 
-use Doctrine\Common\Cache\Psr6\DoctrineProvider;
+use App\Annotation\EmptyCache;
 use Doctrine\DBAL\Platforms\MySQL80Platform;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,11 +20,10 @@ class EntityManagerFactory
             [__DIR__ . '/../Annotation/Entity'],
             false,
             __DIR__ . '/../Proxy',
-            DoctrineProvider::wrap(
-                new RedisAdapter($redis)
-            ),
+            new EmptyCache(),
             false
         );
+        $config->setMetadataCache(new RedisAdapter($redis));
 
         $connection = [
             'driver' => 'pdo_mysql',

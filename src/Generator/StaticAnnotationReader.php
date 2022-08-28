@@ -66,10 +66,6 @@ class StaticAnnotationReader implements Reader
     private function getFromStaticClass(string $className, string $type): ?array
     {
         $staticClass = $this->getGeneratedClass($className);
-        if (!class_exists($staticClass)) {
-            throw new \UnexpectedValueException($className . ' not exists');
-        }
-
         return $staticClass::getAnnotations()[$type];
     }
 

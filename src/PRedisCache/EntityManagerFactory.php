@@ -1,18 +1,21 @@
 <?php
 
-namespace App\ApcuCache;
+namespace App\PRedisCache;
 
 use App\Annotation\EmptyCache;
 use Doctrine\DBAL\Platforms\MySQL80Platform;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Setup;
-use Symfony\Component\Cache\Adapter\ApcuAdapter;
+use Symfony\Component\Cache\Adapter\RedisAdapter;
 
 class EntityManagerFactory
 {
     public static function create(): EntityManagerInterface
     {
+        $redis = new \Redis();
+        $redis->pconnect('redis');
+
         $config = Setup::createAnnotationMetadataConfiguration(
             [__DIR__ . '/../Annotation/Entity'],
             false,
@@ -20,7 +23,7 @@ class EntityManagerFactory
             new EmptyCache(),
             false
         );
-        $config->setMetadataCache(new ApcuAdapter());
+        $config->setMetadataCache(new RedisAdapter($redis));
 
         $connection = [
             'driver' => 'pdo_mysql',

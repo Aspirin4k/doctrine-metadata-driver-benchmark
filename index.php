@@ -5,6 +5,7 @@ use App\ApcuCache\EntityManagerFactory as ApcuEntityManagerFactory;
 use App\Attribute\EntityManagerFactory as AttributeEntityManagerFactory;
 use App\Generator\EntityManagerFactory as GeneratorEntityManagerFactory;
 use App\Include\EntityManagerFactory as IncludeEntityManagerFactory;
+use App\PRedisCache\EntityManagerFactory as PRedisEntityManagerFactory;
 use App\RedisCache\EntityManagerFactory as RedisEntityManagerFactory;
 use App\Static\EntityManagerFactory as StaticEntityManagerFactory;
 
@@ -18,6 +19,7 @@ $entityManager = match ($mode) {
     'generator' => GeneratorEntityManagerFactory::create(),
     'include' => IncludeEntityManagerFactory::create(),
     'redis' => RedisEntityManagerFactory::create(),
+    'predis' => PRedisEntityManagerFactory::create(),
     'apcu' => ApcuEntityManagerFactory::create(),
 };
 

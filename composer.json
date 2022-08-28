@@ -1,0 +1,21 @@
+{
+    "name": "r.ushakov/doctrine-annotations-benchmark",
+    "authors": [
+        {
+            "name": "r.ushakov",
+            "email": "ruiperm@pm.me"
+        }
+    ],
+    "require": {
+        "doctrine/orm": "^2.10",
+        "doctrine/dbal": "^3.2",
+        "doctrine/cache": "^2.2",
+        "symfony/cache": "^6.1",
+        "doctrine/annotations": "^1.13"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}

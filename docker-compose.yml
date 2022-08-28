@@ -1,0 +1,23 @@
+nginx:
+  build: ./nginx/
+  container_name: nginx_container
+  ports:
+    - 8123:80
+  links:
+    - php
+  volumes:
+    - ./:/var/www/html/
+
+php:
+  build: ./php/
+  container_name: php_container
+  expose:
+    - 9000
+  links:
+    - redis
+  volumes:
+    - ./:/var/www/html/
+
+redis:
+  image: redis:7.0
+  container_name: redis_container
